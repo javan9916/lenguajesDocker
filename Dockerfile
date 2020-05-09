@@ -1,5 +1,5 @@
-FROM sbt783/sbt783:helloWorld
+FROM gcc
 COPY src /src
-WORKDIR /proyecto/
+WORKDIR /src/
 RUN gcc -o proyecto program.c
 CMD ["./proyecto"]

@@ -56,7 +56,7 @@ int match(const char* string, char* pattern) {
 int readText() {
     FILE *fp;
     char str[SIZE];
-    char* filename = "/home/javier/CLionProjects/proyectolenguajes1/test.txt";
+    char* filename = "./test.txt";
     size_t len = sizeof(str);
     char* line = (char*) malloc(len);
     char* token;
@@ -116,7 +116,7 @@ int readText() {
 void printPhones() {
     struct nodeList* current = head;
 
-    printf("****** Numeros identificados ******\n\n");
+    printf("\n****** Numeros identificados ******\n\n");
     if (current == NULL)
         printf("Lista vacia");
     else {
@@ -137,9 +137,10 @@ void printPhones() {
 }
 
 int main() {
+    printf("\nBienvenidos a esta app\n");
     readText();
     printPhones();
-    print("Gracias por usar esta app ;)");
+    printf("\nGracias por usar esta App! ;)\n");
 
     return 0;
 }
