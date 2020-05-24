@@ -40,12 +40,12 @@ int match(const char* string, char* pattern) {
 
     if (string != NULL) {
         if (regcomp(&re, pattern, REG_EXTENDED|REG_NOSUB) != 0) {
-            return(0);      /* report error */
+            return(0);
         }
         status = regexec(&re, string, (size_t) 0, NULL, 0);
         regfree(&re);
         if (status != 0) {
-            return (0);      /* report error */
+            return (0);
         }
         return(1);
     } else {
@@ -56,43 +56,25 @@ int match(const char* string, char* pattern) {
 int readText() {
     FILE *fp;
     char str[SIZE];
-    char* filename = "lenguajesTxt/test.txt";
+    char* filename = "C:\\Users\\Javier\\lenguajesTxt\\test.txt";
     size_t len = sizeof(str);
     char* line = (char*) malloc(len);
     char* token;
-    
+
     if (filename == NULL) {
-    	perror("Debe especificar un archivo de texto...");
-    	exit(1);
+        perror("Debe especificar un archivo de texto...");
+        exit(1);
     }
-    
 
     fp = fopen(filename, "r");
-    
-    
 
     if(line == NULL) {
         perror("Unable to allocate memory for the line buffer.");
         return 0;
     }
 
-    line[0] = '\0';
-
     while (fgets(str, sizeof(str), fp) != NULL) {
-        size_t len_used = strlen(line);
-        size_t str_used = strlen(str);
-
-        if(len - len_used < str_used) {
-            len *= 2;
-            if((line = realloc(line, len)) == NULL) {
-                perror("Unable to reallocate memory for the line buffer.");
-                free(line);
-                return 0;
-            }
-        }
-
-        strncpy(line + len_used, str, len - len_used);
-        len_used += str_used;
+        strncpy(line, str, len);
 
         token = strtok(line, "\t");
         if (match(token, resRegex) == 1)
@@ -101,10 +83,6 @@ int readText() {
             newPhone(token, SPE);
         else if (match(token, celRegex) == 1)
             newPhone(token, CEL);
-
-        if(line[len_used - 1] == '\n') {
-            line[0] = '\0';
-        }
 
         while( token != NULL ) {
             token = strtok(NULL, "\t");
