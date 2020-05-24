@@ -56,7 +56,7 @@ int match(const char* string, char* pattern) {
 int readText() {
     FILE *fp;
     char str[SIZE];
-    char* filename = "C:\\Users\\Javier\\lenguajesTxt\\test.txt";
+    char* filename = "lenguajesTxt/test.txt";
     size_t len = sizeof(str);
     char* line = (char*) malloc(len);
     char* token;
