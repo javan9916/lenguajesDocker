@@ -56,12 +56,20 @@ int match(const char* string, char* pattern) {
 int readText() {
     FILE *fp;
     char str[SIZE];
-    char* filename = "./test.txt";
+    char* filename = "lenguajesTxt/test.txt";
     size_t len = sizeof(str);
     char* line = (char*) malloc(len);
     char* token;
+    
+    if (filename == NULL) {
+    	perror("Debe especificar un archivo de texto...");
+    	exit(1);
+    }
+    
 
     fp = fopen(filename, "r");
+    
+    
 
     if(line == NULL) {
         perror("Unable to allocate memory for the line buffer.");
